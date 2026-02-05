@@ -1,0 +1,49 @@
+---
+title: Example Guide
+description: A step-by-step example guide
+---
+
+# Example Guide
+
+This guide walks you through a complete example.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- Node.js 18 or higher
+- An API key from the dashboard
+
+## Building Your First Feature
+
+### Create the Component
+
+```javascript
+function MyFeature() {
+  return (
+    <div>
+      <h1>Hello World</h1>
+    </div>
+  );
+}
+```
+
+### Add Some Logic
+
+```javascript
+async function fetchData() {
+  const response = await fetch('/api/data');
+  return response.json();
+}
+```
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="API Reference" icon="code">
+    Explore the full API documentation
+  </Card>
+  <Card title="Examples" icon="flask">
+    See more example projects
+  </Card>
+</CardGroup>

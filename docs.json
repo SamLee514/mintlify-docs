@@ -1,3 +1,25 @@
 {
-    
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "My Documentation",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction", "quickstart"]
+    },
+    {
+      "group": "Guides",
+      "pages": ["guides/example"]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/example",
+    "twitter": "https://twitter.com/example"
+  }
 }

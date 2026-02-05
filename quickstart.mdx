@@ -1,0 +1,40 @@
+---
+title: Quickstart
+description: Get started in under 5 minutes
+---
+
+# Quickstart Guide
+
+Follow these steps to get started quickly.
+
+## Step 1: Install
+
+```bash
+npm install my-package
+```
+
+## Step 2: Configure
+
+Create a configuration file:
+
+```json
+{
+  "apiKey": "your-api-key",
+  "environment": "production"
+}
+```
+
+## Step 3: Use
+
+```javascript
+import { Client } from 'my-package';
+
+const client = new Client({ apiKey: 'your-api-key' });
+
+const result = await client.doSomething();
+console.log(result);
+```
+
+<Note>
+  Make sure to keep your API key secure and never commit it to version control.
+</Note>
