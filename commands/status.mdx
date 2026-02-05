@@ -1,0 +1,74 @@
+---
+title: "status"
+description: "Check the status of a job run"
+---
+
+# atlas status
+
+Check the status of an existing job run. Useful if you backgrounded a job or want to check on a long-running process.
+
+```bash
+atlas status <job-run-id>
+```
+
+---
+
+## Arguments
+
+<ParamField path="job-run-id" type="string" required>
+  The UUID of the job run to check. This is displayed when you start an upload:
+  
+  ```
+  ✓ Processing started
+    Job run: abc123-def456-ghi789
+  ```
+</ParamField>
+
+---
+
+## Example
+
+```bash
+atlas status abc123-def456-ghi789
+```
+
+### Output - Completed
+
+```
+  ◐ Checking status...
+
+  ✓ Status: completed
+  → Report: https://your-atlas-server/issue/xyz789...
+```
+
+### Output - Running
+
+```
+  ◐ Checking status...
+
+  → Status: running
+```
+
+### Output - Failed
+
+```
+  ◐ Checking status...
+
+  ✗ Status: failed
+```
+
+---
+
+## Status Values
+
+| Status | Description |
+|--------|-------------|
+| `pending` | Job is queued but not yet started |
+| `running` | Job is actively processing |
+| `completed` | Job finished successfully |
+| `failed` | Job encountered an error |
+| `cancelled` | Job was cancelled |
+
+<Tip>
+  If a job fails, check the Atlas web interface for detailed error logs and diagnostics.
+</Tip>

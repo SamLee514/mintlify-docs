@@ -1,11 +1,20 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "My Documentation",
+  "theme": "willow",
+  "name": "Atlas CLI",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373"
+    "primary": "#e6fb53",
+    "light": "#f0fc63",
+    "dark": "#c1de3e",
+    "background": {
+      "dark": "#0e0e0e",
+      "light": "#ffffff"
+    }
+  },
+  "favicon": "/favicon.svg",
+  "logo": {
+    "dark": "/logo-dark.svg",
+    "light": "/logo-light.svg"
   },
   "navigation": {
     "tabs": [
@@ -14,14 +23,27 @@
         "groups": [
           {
             "group": "Getting Started",
-            "pages": ["introduction", "quickstart"]
+            "pages": ["introduction", "installation", "quickstart"]
           },
           {
-            "group": "Guides",
-            "pages": ["guides/example"]
+            "group": "Commands",
+            "pages": ["commands/upload", "commands/status", "commands/auth"]
+          },
+          {
+            "group": "Advanced",
+            "pages": ["advanced/parallel-uploads", "advanced/troubleshooting"]
           }
         ]
       }
     ]
+  },
+  "footerSocials": {
+    "github": "https://github.com/arena-ai"
+  },
+  "feedback": {
+    "thumbsRating": true
+  },
+  "modeToggle": {
+    "default": "dark"
   }
 }

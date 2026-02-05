@@ -1,0 +1,86 @@
+---
+title: "Installation"
+description: "Get the Atlas CLI running on your machine"
+---
+
+# Installation
+
+Choose your installation method. The quick install is recommended for most users.
+
+---
+
+## Quick Install (Recommended)
+
+Run this single command to download, install, and start authentication:
+
+<CodeGroup>
+```bash macOS / Linux
+curl -fsSL https://your-atlas-server/api/v1/cli/install.sh | bash
+```
+
+```powershell Windows
+irm https://your-atlas-server/api/v1/cli/install.sh | iex
+```
+</CodeGroup>
+
+<Info>
+  Replace `your-atlas-server` with your Atlas deployment hostname (e.g., `ghost.anduril.gov.arena-ai.com`).
+</Info>
+
+The installer will:
+- Detect your OS and architecture automatically
+- Download the correct binary
+- Install to `~/.local/bin/`
+- Start the login flow
+
+---
+
+## Manual Installation
+
+If you prefer to install manually, download the binary for your platform:
+
+| Platform | Download Path |
+|----------|---------------|
+| macOS (Intel) | `/api/v1/cli/download/darwin-amd64` |
+| macOS (Apple Silicon) | `/api/v1/cli/download/darwin-arm64` |
+| Linux (x86_64) | `/api/v1/cli/download/linux-amd64` |
+| Windows | `/api/v1/cli/download/windows-amd64` |
+
+Then make it executable and add to your PATH:
+
+```bash
+chmod +x atlas-*
+mv atlas-* ~/.local/bin/atlas
+```
+
+<Warning>
+  Make sure `~/.local/bin` is in your PATH. Add this to your shell config if needed:
+  
+  ```bash
+  export PATH="$PATH:$HOME/.local/bin"
+  ```
+</Warning>
+
+---
+
+## Verify Installation
+
+Check that the CLI is installed correctly:
+
+```bash
+atlas version
+```
+
+You should see:
+
+```
+Atlas CLI v2.1.0
+```
+
+---
+
+## Next Steps
+
+<Card title="Authenticate" icon="key" href="/quickstart">
+  Run `atlas login` to connect your account
+</Card>

@@ -1,21 +1,90 @@
 ---
-title: Introduction
-description: Welcome to our documentation
+title: "Atlas CLI"
+sidebarTitle: "Introduction"
+description: "Generate Ghost Flight Reports from your terminal in seconds"
 ---
 
-# Welcome
+<img
+  className="block dark:hidden"
+  src="/hero-light.svg"
+  alt="Atlas CLI Hero"
+/>
+<img
+  className="hidden dark:block"
+  src="/hero-dark.svg"
+  alt="Atlas CLI Hero"
+/>
 
-This is your documentation homepage. Here you'll find everything you need to get started.
+# Ship flight data. Get answers.
 
-## Overview
-
-Our platform helps you build amazing things quickly and efficiently.
+The Atlas CLI is the fastest way to upload flight data and generate Ghost Flight Reports (GFRs). No browser needed. No clicking around. Just pure, terminal-driven efficiency.
 
 <CardGroup cols={2}>
-  <Card title="Quickstart" icon="rocket" href="/quickstart">
-    Get up and running in minutes
+  <Card title="30 Second Setup" icon="bolt">
+    One command to install. One command to authenticate. You're flying.
   </Card>
-  <Card title="Guides" icon="book" href="/guides/example">
-    Learn with step-by-step tutorials
+  <Card title="Parallel Uploads" icon="arrows-split-up-and-left">
+    Upload multiple flights simultaneously with real-time progress tracking.
+  </Card>
+  <Card title="Log Analysis" icon="file-magnifying-glass">
+    Attach log files for deeper software and CAN bus analysis.
+  </Card>
+  <Card title="Fleet Integration" icon="plane">
+    Auto-links reports to your fleet assets by tail number.
+  </Card>
+</CardGroup>
+
+---
+
+## Quick Example
+
+```bash
+# Install
+curl -fsSL https://your-atlas-server/api/v1/cli/install.sh | bash
+
+# Authenticate
+atlas login
+
+# Upload and generate report
+atlas upload flight.bin --tailnum 436
+```
+
+That's it. Your Ghost Flight Report will be ready in minutes.
+
+---
+
+## What You'll Get
+
+When you upload a `.bin` file, Atlas automatically:
+
+<Steps>
+  <Step title="Parses binary telemetry">
+    Extracts all flight parameters from your bin file
+  </Step>
+  <Step title="Analyzes flight data">
+    Runs AI-powered analysis on telemetry patterns
+  </Step>
+  <Step title="Generates insights">
+    Creates a comprehensive Ghost Flight Report
+  </Step>
+  <Step title="Links to fleet">
+    Associates the report with your aircraft asset
+  </Step>
+</Steps>
+
+<Note>
+  Add log files with `-l` for additional software and CAN bus analysis. The more data you provide, the deeper the insights.
+</Note>
+
+---
+
+## Ready?
+
+<CardGroup cols={2}>
+  <Card title="Install Now" icon="download" href="/installation">
+    Get the CLI installed in 30 seconds
+  </Card>
+  <Card title="Quick Start" icon="rocket" href="/quickstart">
+    Upload your first flight in 2 minutes
   </Card>
 </CardGroup>
