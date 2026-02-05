@@ -7,19 +7,21 @@
     "light": "#07C983",
     "dark": "#0D9373"
   },
-  "favicon": "/favicon.svg",
-  "navigation": [
-    {
-      "group": "Getting Started",
-      "pages": ["introduction", "quickstart"]
-    },
-    {
-      "group": "Guides",
-      "pages": ["guides/example"]
-    }
-  ],
-  "footerSocials": {
-    "github": "https://github.com/example",
-    "twitter": "https://twitter.com/example"
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["introduction", "quickstart"]
+          },
+          {
+            "group": "Guides",
+            "pages": ["guides/example"]
+          }
+        ]
+      }
+    ]
   }
 }
