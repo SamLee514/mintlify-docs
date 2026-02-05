@@ -3,9 +3,9 @@
   "theme": "willow",
   "name": "Atlas CLI",
   "colors": {
-    "primary": "#e6fb53",
-    "light": "#f0fc63",
-    "dark": "#c1de3e"
+    "primary": "#171717",
+    "light": "#45b1f9",
+    "dark": "#e6fb53"
   },
   "favicon": "/favicon.svg",
   "logo": {
@@ -18,28 +18,14 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting Started",
-            "pages": ["introduction", "installation", "quickstart"]
-          },
-          {
-            "group": "Commands",
-            "pages": ["commands/upload", "commands/status", "commands/auth"]
-          },
-          {
-            "group": "Advanced",
-            "pages": ["advanced/parallel-uploads", "advanced/troubleshooting"]
+            "group": "Getting started",
+            "pages": ["introduction", "commands"]
           }
         ]
       }
     ]
   },
-  "footerSocials": {
-    "github": "https://github.com/arena-ai"
-  },
-  "feedback": {
-    "thumbsRating": true
-  },
   "modeToggle": {
-    "default": "dark"
+    "default": "light"
   }
 }

@@ -1,0 +1,113 @@
+---
+title: "Commands reference"
+sidebarTitle: "Commands"
+description: "Complete reference for all Atlas CLI commands"
+---
+
+## atlas login
+
+Authenticate with Atlas using device code flow.
+
+```bash
+atlas login
+```
+
+Opens a browser to complete authentication. Your token is saved to `~/.atlas/token` for future use.
+
+---
+
+## atlas logout
+
+Remove saved authentication credentials.
+
+```bash
+atlas logout
+```
+
+---
+
+## atlas upload
+
+Upload flight data and generate a Ghost Flight Report.
+
+```bash
+atlas upload <file.bin> [files...] --tailnum <number> [options]
+```
+
+### Required flags
+
+| Flag | Description |
+|------|-------------|
+| `--tailnum` | Tail number of the aircraft |
+
+### Optional flags
+
+| Flag | Description |
+|------|-------------|
+| `-l, --log-file` | Add a log file for analysis (can be repeated) |
+| `--system` | System/product type (default: `ghost`) |
+| `--url` | Override Atlas API URL |
+| `--token` | Override authentication token |
+| `-k, --insecure` | Skip TLS certificate verification |
+
+### Examples
+
+```bash
+# Single flight
+atlas upload flight.bin --tailnum 4308
+
+# With log files
+atlas upload flight.bin -l software.log -l can.log --tailnum 4308
+
+# Multiple flights (parallel processing)
+atlas upload flight1.bin flight2.bin flight3.bin --tailnum 4308
+```
+
+---
+
+## atlas status
+
+Check the status of an existing job run.
+
+```bash
+atlas status <job-run-id>
+```
+
+The job run ID is displayed when you start an upload.
+
+### Status values
+
+| Status | Description |
+|--------|-------------|
+| `pending` | Job is queued |
+| `running` | Job is processing |
+| `completed` | Job finished successfully |
+| `failed` | Job encountered an error |
+
+---
+
+## atlas version
+
+Display the CLI version.
+
+```bash
+atlas version
+```
+
+---
+
+## Environment variables
+
+| Variable | Description |
+|----------|-------------|
+| `ATLAS_URL` | Atlas API endpoint |
+| `ATLAS_TOKEN` | Authentication token |
+
+---
+
+## Configuration files
+
+| File | Description |
+|------|-------------|
+| `~/.atlas/token` | Saved authentication token |
+| `~/.atlas/url` | Saved API URL |
