@@ -1,19 +1,21 @@
 ---
 title: "Atlas CLI overview"
 sidebarTitle: "Overview"
-description: "Learn about Atlas CLI, Arena's command line tool for creating Ghost Flight Reports - helping you turn raw data into post-flight analysis faster than ever before."
+description: "Learn about Atlas CLI, Arena's command line tool for creating generating issues - helping you turn raw data into post-flight analysis faster than ever before."
 ---
+
+## Before you begin
+
+Learn about Atlas CLI, Arena's command line tool for generating issues from your data - helping you turn raw telemetry into actionable insights faster than ever before.
 
 ## Before you begin
 
 Make sure you have:
 
 - A terminal or command prompt open
-- An **Atlas account** (Reach out in **#sp-arena-ghost** to get set up)
+- An **Atlas account** (Reach out in **#ext-arena-regent-craft** to get set up)
 
-<Note>
-  This guide covers the terminal CLI. Atlas is also available on the [**web**](https://ghost.anduril.gov.arena-ai.com) for uploading files and viewing reports.
-</Note>
+> **Note:** This guide covers the terminal CLI. Atlas is also available on the [web](https://regent.atlas.arena-ai.com) for viewing reports.
 
 ---
 
@@ -22,13 +24,13 @@ Make sure you have:
 **macOS / Linux:**
 
 ```bash
-curl -fsSL http://ghost.anduril.gov.arena-ai.com/api/v1/cli/install.sh | bash
+curl -fsSL https://regent.atlas.arena-ai.com/api/v1/cli/install.sh | bash
 ```
 
 Then reload your shell:
 
 ```bash
-source ~/.zshrc   # or ~/.bashrc
+source ~/.bashrc   # or ~/.zshrc
 ```
 
 ---
@@ -41,13 +43,49 @@ Link your Atlas account to the CLI:
 atlas login
 ```
 
-This opens a browser window to complete authentication. Once finished, your token is saved locally.
+This opens a browser window to complete authentication. Once finished, your token is saved locally at `~/.atlas/token`.
 
 ---
 
-## Generating Ghost Flight Reports
+## Generating diagnostic issue reports
 
-Upload a `.bin` file and Atlas automatically generates a **Ghost Flight Report (GFR)** - an AI-powered analysis that identifies anomalies, analyzes flight parameters, and provides actionable insights about what happened during the flight.
+The `generate-issue` command provides an **interactive experience** to create AI-powered diagnostic reports from your data files. Atlas analyzes telemetry data, identifies root causes, and generates structured issue reports with evidence and visualizations.
+
+### Generating issues 
+
+Run the command to start:
+
+```bash
+atlas generate-issue
+```
+
+The CLI will guide you through:
+
+1. **File selection**: Provide a file or directory name (either a local path or something you've uploaded already)
+   - Local files: `~/data/flight_data.parquet` or `data.parquet`
+   - Directories: `~/telemetry/mission_1/` (uploads all files inside)
+   - Uploaded files: Just the file or directory name if already uploaded
+
+2. **Conflict handling**: If the file or directory has been uploaded to Atlas already, choose:
+   - Use the existing uploaded file
+   - Replace with your local version
+   - Quit and rename
+
+3. **Optional context**: Add up to 3 existing issue IDs to provide context (you can get the issue ID of an issue from the URL in the web app, i.e. `https://regent.atlas.arena-ai.com/issue/{issue ID}`)
+
+4. **Additional instructions**: Provide any specific guidance for the analysis
+
+5. **Confirmation**: Review your configuration before submitting
+
+### What happens next
+
+1. Files are uploaded to Atlas (if needed)
+2. A diagnostic job starts processing your data
+3. You'll see real-time progress:
+   - `[Workflow] Thinking` - AI is analyzing the data
+   - `[Tool] Using <tool>` - Atlas is querying telemetry, checking schemas, etc.
+4. Processing takes 5-15 minutes depending on data size
+5. When complete, you get a link to your diagnostic issue report
 
 <Frame>
   ![Example Ghost Flight Report](/gfr-example.png)
@@ -70,22 +108,92 @@ Upload a `.bin` file and Atlas automatically generates a **Ghost Flight Report (
   </Tab>
 </Tabs>
 
+
 ---
 
-## What happens next
+## Resume interrupted jobs
 
-1. Your files are uploaded and a Ghost Flight Report job starts
-2. Processing takes 5-10 minutes depending on file size
-3. When complete, you get a link to your report and the page for that asset
+If your terminal gets disconnected, you can re-attach to running jobs:
+
+```bash
+atlas generate-issue --resume
+```
+
+This shows a list of active jobs you can select and continue monitoring.
+
+---
+
+## Managing jobs
+
+### Check job status
+
+```bash
+atlas status <job-run-id>
+```
+
+View the current status of any job run.
+
+### Cancel a running job
+
+```bash
+atlas cancel <job-run-id>
+```
+
+Stop a job that's currently running or pending. The computation will stop and the job status will update to `cancelled`.
 
 ---
 
 ## Commands reference
 
-| Command                               | Description              |
-| ------------------------------------- | ------------------------ |
-| `atlas login`                         | Authenticate with Atlas  |
-| `atlas upload <file> --tailnum <num>` | Upload flight data       |
-| `atlas status <job-run-id>`           | Check job status         |
-| `atlas logout`                        | Remove saved credentials |
-| `atlas version`                       | Show CLI version         |
+| Command                        | Description                                |
+| ------------------------------ | ------------------------------------------ |
+| `atlas login`                  | Authenticate with Atlas                    |
+| `atlas generate-issue`         | Start interactive issue generation         |
+| `atlas generate-issue --resume`| Resume monitoring an existing job          |
+| `atlas status <job-run-id>`    | Check job status                           |
+| `atlas cancel <job-run-id>`    | Cancel a running job                       |
+| `atlas logout`                 | Remove saved credentials                   |
+| `atlas version`                | Show CLI version                           |
+
+---
+
+## Tips & best practices
+
+**File uploads:**
+- If you're analyzing the same data multiple times, the CLI remembers uploaded files - just select "use existing" when prompted
+- For large directories, the CLI uploads files in parallel for faster processing
+- Directory structure is preserved: `~/myFolder` uploads to `s3://bucket/user_uploaded_issue_files/myFolder`
+
+**Job management:**
+- The job run URL is displayed immediately when a job starts - save it for reference
+- Use `--resume` if you need to disconnect from the CLI but want to check back later
+- Jobs can be viewed and managed on the web at `https://regent.atlas.arena-ai.com/jobs/<job-run-id>`
+
+**Authentication:**
+- Your token is saved to `~/.atlas/token` and remains valid for 24 hours
+- Run `atlas login` again if you see authentication errors
+- The Atlas URL is saved to `~/.atlas/url` during installation
+
+---
+
+## Troubleshooting
+
+**"Not authenticated" error:**
+```bash
+atlas login
+```
+
+**SSL certificate errors during install:**
+```bash
+curl -fsSL -k https://regent.atlas.arena-ai.com/api/v1/cli/install.sh | bash
+```
+
+**Can't find uploaded file:**
+- Check the filename matches exactly (case-sensitive)
+- Use the full path if the file is in a subdirectory
+- Files are uploaded to `user_uploaded_issue_files/` prefix in S3
+
+**Job taking too long:**
+- Check the job status on the web: `https://regent.atlas.arena-ai.com/jobs/<job-run-id>`
+- Large datasets with many files can take 15+ minutes
+- You can safely disconnect and use `--resume` to check back later
