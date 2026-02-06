@@ -26,42 +26,59 @@ atlas logout
 
 ---
 
-## atlas upload
+## atlas generate-issue
 
-Upload flight data and generate a Ghost Flight Report.
+Generate AI-powered diagnostic issue reports from your data files.
 
 ```bash
-atlas upload <file.bin> [files...] --tailnum <number> [options]
+atlas generate-issue [options]
 ```
 
-### Required flags
+### Interactive flow
+
+The command provides an interactive experience that guides you through:
+
+1. **File selection**: Provide a file or directory name (either a local path or something you've uploaded already).
+   - Local files: `~/data/flight_data.parquet` or `data.parquet`
+   - Directories: `~/telemetry/mission_1/` (uploads all files inside)
+   - Uploaded files: Just the file or directory name if already uploaded.
+
+2. **Conflict handling**: If the file or directory has been uploaded to Atlas already, choose:
+   - Use the existing uploaded file
+   - Replace with your local version
+   - Quit and rename
+
+3. **Optional context**: Add up to 3 existing issue IDs to provide context (you can get the issue ID from the URL in the web app, e.g., `https://regent.atlas.arena-ai.com/issue/{issue ID}`).
+
+4. **Additional instructions**: Provide any specific guidance for the analysis.
+
+5. **Confirmation**: Review your configuration before submitting.
+
+### Options
 
 | Flag | Description |
 |------|-------------|
-| `--tailnum` | Tail number of the aircraft |
-
-### Optional flags
-
-| Flag | Description |
-|------|-------------|
-| `-l, --log-file` | Add a log file for analysis (can be repeated) |
-| `--system` | System/product type (default: `ghost`) |
-| `--url` | Override Atlas API URL |
-| `--token` | Override authentication token |
-| `-k, --insecure` | Skip TLS certificate verification |
+| `--resume` | Resume monitoring an existing job run |
 
 ### Examples
 
 ```bash
-# Single flight
-atlas upload flight.bin --tailnum 4308
+# Start new issue generation
+atlas generate-issue
 
-# With log files
-atlas upload flight.bin -l software.log -l can.log --tailnum 4308
-
-# Multiple flights (parallel processing)
-atlas upload flight1.bin flight2.bin flight3.bin --tailnum 4308
+# Resume monitoring a previous job
+atlas generate-issue --resume
 ```
+
+### Resume interrupted jobs
+
+If your terminal gets disconnected, you can re-attach to running jobs:
+
+```bash
+atlas generate-issue --resume
+```
+
+This shows a list of active jobs you can select and continue monitoring.
 
 ---
 
@@ -73,7 +90,7 @@ Check the status of an existing job run.
 atlas status <job-run-id>
 ```
 
-The job run ID is displayed when you start an upload.
+The job run ID is displayed when you start issue generation. You can also find it in the URL when viewing a job on the web.
 
 ### Status values
 
@@ -83,6 +100,31 @@ The job run ID is displayed when you start an upload.
 | `running` | Job is processing |
 | `completed` | Job finished successfully |
 | `failed` | Job encountered an error |
+| `cancelled` | Job was cancelled |
+
+### Examples
+
+```bash
+atlas status 550e8400-e29b-41d4-a716-446655440000
+```
+
+---
+
+## atlas cancel
+
+Cancel a running or pending job.
+
+```bash
+atlas cancel <job-run-id>
+```
+
+Stop a job that's currently running or pending. The computation stops and the job status updates to `cancelled`.
+
+### Examples
+
+```bash
+atlas cancel 550e8400-e29b-41d4-a716-446655440000
+```
 
 ---
 
@@ -96,12 +138,53 @@ atlas version
 
 ---
 
-## Environment variables
+## Tips & best practices
 
-| Variable | Description |
-|----------|-------------|
-| `ATLAS_URL` | Atlas API endpoint |
-| `ATLAS_TOKEN` | Authentication token |
+### File uploads
+
+- If you're analyzing the same data multiple times, the CLI remembers previously uploaded files - just select "use existing" when prompted.
+- For large directories, the CLI uploads files in parallel for faster processing.
+- Directory structure is preserved: `~/myFolder` uploads to `s3://bucket/user_uploaded_issue_files/myFolder`.
+
+### Job management
+
+- The job run URL is displayed immediately when a job starts - save it for reference.
+- Use `--resume` if you need to disconnect from the CLI but want to check back later.
+- Jobs can be viewed and managed on the web at `https://regent.atlas.arena-ai.com/jobs/<job-run-id>`.
+
+### Authentication
+
+- Your token is saved to `~/.atlas/token` and remains valid for 24 hours.
+- Run `atlas login` again if you see authentication errors.
+- The Atlas URL is saved to `~/.atlas/url` during installation.
+
+---
+
+## Troubleshooting
+
+### "Not authenticated" error
+
+```bash
+atlas login
+```
+
+Run this command to re-authenticate with Atlas.
+
+---
+
+### Can't find uploaded file
+
+- Check that the filename matches exactly (case-sensitive).
+- Use the full path if the file is in a subdirectory.
+- Files are uploaded to the `user_uploaded_issue_files/` prefix in S3.
+
+---
+
+### Job taking too long
+
+- Check the job status on the web: `https://regent.atlas.arena-ai.com/jobs/<job-run-id>`.
+- Large datasets with many files can take 15 minutes or more.
+- You can safely disconnect and use `--resume` to check back later.
 
 ---
 
@@ -111,3 +194,12 @@ atlas version
 |------|-------------|
 | `~/.atlas/token` | Saved authentication token |
 | `~/.atlas/url` | Saved API URL |
+
+---
+
+## Environment variables
+
+| Variable | Description |
+|----------|-------------|
+| `ATLAS_URL` | Atlas API endpoint |
+| `ATLAS_TOKEN` | Authentication token |
