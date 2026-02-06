@@ -39,6 +39,7 @@
     }
   },
   "fonts": {
-    "family": "Lato"
+    "family": "Lato",
+    "weight": 100
   }
 }
