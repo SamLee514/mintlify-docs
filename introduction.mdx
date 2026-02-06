@@ -9,10 +9,10 @@ description: "Learn about Atlas CLI, Arena's command line tool for creating Ghos
 Make sure you have:
 
 - A terminal or command prompt open
-- An **Atlas account** (contact Arya Hezarkhini from Arena in **#sp-arena-ghost** to get set up)
+- An **Atlas account** (Reach out in **#sp-arena-ghost** to get set up)
 
 <Note>
-  This guide covers the terminal CLI. Atlas is also available on the **[web](https://ghost.anduril.gov.arena-ai.com)** for uploading files and viewing reports.
+  This guide covers the terminal CLI. Atlas is also available on the [**web**](https://ghost.anduril.gov.arena-ai.com) for uploading files and viewing reports.
 </Note>
 
 ---
@@ -50,7 +50,7 @@ This opens a browser window to complete authentication. Once finished, your toke
 Upload a `.bin` file and Atlas automatically generates a **Ghost Flight Report (GFR)** - an AI-powered analysis that identifies anomalies, analyzes flight parameters, and provides actionable insights about what happened during the flight.
 
 <Frame>
-  <img src="/gfr-example.png" alt="Example Ghost Flight Report" />
+  ![Example Ghost Flight Report](/gfr-example.png)
 </Frame>
 
 <Tabs>
@@ -58,14 +58,14 @@ Upload a `.bin` file and Atlas automatically generates a **Ghost Flight Report (
     ```bash
     atlas upload flight.bin --tailnum 4308
     ```
-    
+
     The `--tailnum` is required to identify the asset when uploading flight data.
   </Tab>
   <Tab title="Multiple flights">
     ```bash
     atlas upload flight1.bin flight2.bin flight3.bin --tailnum 4308
     ```
-    
+
     Multiple bin files are processed in parallel. All reports are linked to the same asset.
   </Tab>
 </Tabs>
@@ -82,10 +82,10 @@ Upload a `.bin` file and Atlas automatically generates a **Ghost Flight Report (
 
 ## Commands reference
 
-| Command | Description |
-|---------|-------------|
-| `atlas login` | Authenticate with Atlas |
-| `atlas upload <file> --tailnum <num>` | Upload flight data |
-| `atlas status <job-run-id>` | Check job status |
-| `atlas logout` | Remove saved credentials |
-| `atlas version` | Show CLI version |
+| Command                               | Description              |
+| ------------------------------------- | ------------------------ |
+| `atlas login`                         | Authenticate with Atlas  |
+| `atlas upload <file> --tailnum <num>` | Upload flight data       |
+| `atlas status <job-run-id>`           | Check job status         |
+| `atlas logout`                        | Remove saved credentials |
+| `atlas version`                       | Show CLI version         |
