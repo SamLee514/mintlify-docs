@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="6" fill="#0e0e0e"/>
-  <text x="16" y="22" text-anchor="middle" fill="#e6fb53" font-family="system-ui" font-weight="bold" font-size="18">A</text>
+<svg width="32" height="32" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="20" height="20" rx="4" fill="#171717"/>
+  <path d="M11.0952 3.08643L8.53612 3.08644L3.12744 16.921H5.87554L7.0658 13.7053H12.9121L14.1023 16.921H16.8504L12.5606 5.98366H10.0304L12.1069 11.5497H7.87098L9.95393 5.96643L11.0952 3.08643Z" fill="#e6fb53"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M20.0001 0V20H14.6226V18.9011H18.8951V1.0989H14.6226V0H20.0001Z" fill="#e6fb53"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M-9.05991e-05 0V20H5.37744V18.9011H1.10488V1.0989H5.37744V0H-9.05991e-05Z" fill="#e6fb53"/>
 </svg>

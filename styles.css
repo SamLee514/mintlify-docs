@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --font-headings: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* All text uses Manrope */
+body,
+html,
+* {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-weight: 600;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+p, li, span, a, td, th {
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* Code blocks use standard monospace */
+code, pre, kbd, samp,
+code *, pre *,
+[class*="code"],
+[class*="Code"] {
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace !important;
+}
+
+/* Uniform background */
+body,
+.dark,
+[data-theme="dark"] {
+  background-color: #1a1a1a !important;
+}
+
+/* Remove sidebar divider line */
+nav,
+aside,
+[class*="sidebar"],
+[class*="Sidebar"] {
+  border-right: none !important;
+  border-color: transparent !important;
+  background-color: #1a1a1a !important;
+}
+
+/* Remove any vertical dividers */
+[class*="divider"],
+[class*="border-r"] {
+  border-right: none !important;
+}
+
+/* Make logo bigger */
+[class*="logo"] img,
+nav img,
+header img,
+a[href="/"] img {
+  height: 50px !important;
+  width: auto !important;
+  max-height: 50px !important;
+}

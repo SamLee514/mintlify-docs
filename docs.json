@@ -1,16 +1,20 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "willow",
+  "theme": "maple",
   "name": "Atlas CLI",
+  "styling": {
+    "global": "/styles.css"
+  },
   "colors": {
-    "primary": "#171717",
-    "light": "#45b1f9",
+    "primary": "#e6fb53",
+    "light": "#e6fb53",
     "dark": "#e6fb53"
   },
   "favicon": "/favicon.svg",
   "logo": {
     "dark": "/logo-dark.svg",
-    "light": "/logo-light.svg"
+    "light": "/logo-light.svg",
+    "height": 50
   },
   "navigation": {
     "tabs": [
@@ -25,7 +29,11 @@
       }
     ]
   },
-  "modeToggle": {
-    "default": "light"
+  "appearance": "dark",
+  "footer": {
+    "copyright": "Arena Technologies © 2026",
+    "socials": {
+      "website": "https://arena.ai"
+    }
   }
 }

@@ -4,49 +4,54 @@ sidebarTitle: "Overview"
 description: "Learn about Atlas CLI, Arena's command line tool for creating Ghost Flight Reports - helping you turn raw data into post-flight analysis faster than ever before."
 ---
 
-## Get started in 30 seconds
+## Before you begin
 
-**Prerequisites:**
+Make sure you have:
 
-An **Atlas account** (contact Arya Hezarkhini from Arena in **#sp-arena-ghost** to get set up)
+- A terminal or command prompt open
+- An **Atlas account** (contact Arya Hezarkhini from Arena in **#sp-arena-ghost** to get set up)
+
+<Note>
+  This guide covers the terminal CLI. Atlas is also available on the **[web](https://ghost.anduril.gov.arena-ai.com)** for uploading files and viewing reports.
+</Note>
 
 ---
 
-## Install Atlas CLI
+## Step 1: Install Atlas CLI
 
-To install Atlas CLI, run the following command in your terminal:
+**macOS / Linux:**
 
 ```bash
 curl -fsSL http://ghost.anduril.gov.arena-ai.com/api/v1/cli/install.sh | bash
 ```
 
-After installation, activate it in your current terminal:
+Then reload your shell:
 
-<CodeGroup>
-```bash zshrc
-source ~/.zshrc
+```bash
+source ~/.zshrc   # or ~/.bashrc
 ```
-
-```bash bash
-source ~/.bashrc
-```
-</CodeGroup>
 
 ---
 
-## Authenticate
+## Step 2: Authenticate
 
-Next, link your Atlas account to the CLI:
+Link your Atlas account to the CLI:
 
 ```bash
 atlas login
 ```
 
-This prompts you to open the login page and generates an authentication token. Once you finish logging in, enter the authentication token and navigate back to your terminal.
+This opens a browser window to complete authentication. Once finished, your token is saved locally.
 
 ---
 
-## Upload flight data
+## Generating Ghost Flight Reports
+
+Upload a `.bin` file and Atlas automatically generates a **Ghost Flight Report (GFR)** - an AI-powered analysis that identifies anomalies, analyzes flight parameters, and provides actionable insights about what happened during the flight.
+
+<Frame>
+  <img src="/gfr-example.png" alt="Example Ghost Flight Report" />
+</Frame>
 
 <Tabs>
   <Tab title="Single flight">
@@ -54,14 +59,7 @@ This prompts you to open the login page and generates an authentication token. O
     atlas upload flight.bin --tailnum 4308
     ```
     
-    The `--tailnum` is required to identify the asset when uploading flight logs.
-  </Tab>
-  <Tab title="Single flight with logs">
-    ```bash
-    atlas upload flight.bin -l software.log -l can.log --tailnum 4308
-    ```
-    
-    Use the `-l` flag to attach log files for additional software and CAN bus analysis.
+    The `--tailnum` is required to identify the asset when uploading flight data.
   </Tab>
   <Tab title="Multiple flights">
     ```bash
@@ -77,7 +75,7 @@ This prompts you to open the login page and generates an authentication token. O
 ## What happens next
 
 1. Your files are uploaded and a Ghost Flight Report job starts
-2. Processing takes 5-10 minutes depending on file size and log analysis
+2. Processing takes 5-10 minutes depending on file size
 3. When complete, you get a link to your report and the page for that asset
 
 ---
