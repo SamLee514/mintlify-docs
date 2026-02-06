@@ -80,33 +80,14 @@ The CLI will guide you through:
 ### What happens next
 
 1. Files are uploaded to Atlas (if needed)
-2. A diagnostic job starts processing your data
-3. You'll see real-time progress:
-   - `[Workflow] Thinking` - AI is analyzing the data
-   - `[Tool] Using <tool>` - Atlas is querying telemetry, checking schemas, etc.
-4. Processing takes 5-15 minutes depending on data size
+2. A diagnostic job starts processing your data, and a link to the live job run will be provided.
+3. You'll see real-time progress as the job runs, both on the job page and in the ongoing CLI session.
+4. Processing takes 15-40 minutes depending on the size of your data upload (10GB of data ~ 30 minutes)
 5. When complete, you get a link to your diagnostic issue report
 
 <Frame>
-  ![Example Ghost Flight Report](/gfr-example.png)
+  ![Example Ghost Flight Report](/issue.png)
 </Frame>
-
-<Tabs>
-  <Tab title="Single flight">
-    ```bash
-    atlas upload flight.bin --tailnum 4308
-    ```
-
-    The `--tailnum` is required to identify the asset when uploading flight data.
-  </Tab>
-  <Tab title="Multiple flights">
-    ```bash
-    atlas upload flight1.bin flight2.bin flight3.bin --tailnum 4308
-    ```
-
-    Multiple bin files are processed in parallel. All reports are linked to the same asset.
-  </Tab>
-</Tabs>
 
 
 ---
