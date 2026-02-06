@@ -29,7 +29,9 @@
       }
     ]
   },
-  "appearance": "dark",
+  "appearance": {
+    "default": "dark"
+  },
   "footer": {
     "copyright": "Arena Technologies © 2026",
     "socials": {
