@@ -1,7 +1,7 @@
 ---
 title: "Atlas CLI overview"
 sidebarTitle: "Overview"
-description: "Learn about Atlas CLI, Arena's command line tool for creating generating issues - helping you turn raw data into post-flight analysis faster than ever before."
+description: "Learn about Atlas CLI, Arena's command line tool for generating issues - helping you turn raw data into post-flight analysis faster than ever before."
 ---
 
 ## Before you begin
@@ -13,7 +13,7 @@ Learn about Atlas CLI, Arena's command line tool for generating issues from your
 Make sure you have:
 
 - A terminal or command prompt open
-- An **Atlas account** (Reach out in **#ext-arena-regent-craft** to get set up)
+- An **Atlas account** (Reach out in **#ext-arena-regent-craft** to get set up.)
 
 > **Note:** This guide covers the terminal CLI. Atlas is also available on the [web](https://regent.atlas.arena-ai.com) for viewing reports.
 
@@ -61,29 +61,29 @@ atlas generate-issue
 
 The CLI will guide you through:
 
-1. **File selection**: Provide a file or directory name (either a local path or something you've uploaded already)
+1. **File selection**: Provide a file or directory name (either a local path or something you've uploaded already).
    - Local files: `~/data/flight_data.parquet` or `data.parquet`
    - Directories: `~/telemetry/mission_1/` (uploads all files inside)
-   - Uploaded files: Just the file or directory name if already uploaded
+   - Uploaded files: Just the file or directory name if already uploaded.
 
 2. **Conflict handling**: If the file or directory has been uploaded to Atlas already, choose:
    - Use the existing uploaded file
    - Replace with your local version
    - Quit and rename
 
-3. **Optional context**: Add up to 3 existing issue IDs to provide context (you can get the issue ID of an issue from the URL in the web app, i.e. `https://regent.atlas.arena-ai.com/issue/{issue ID}`)
+3. **Optional context**: Add up to 3 existing issue IDs to provide context (you can get the issue ID from the URL in the web app, e.g., `https://regent.atlas.arena-ai.com/issue/{issue ID}`).
 
-4. **Additional instructions**: Provide any specific guidance for the analysis
+4. **Additional instructions**: Provide any specific guidance for the analysis.
 
-5. **Confirmation**: Review your configuration before submitting
+5. **Confirmation**: Review your configuration before submitting.
 
 ### What happens next
 
-1. Files are uploaded to Atlas (if needed)
-2. A diagnostic job starts processing your data, and a link to the live job run will be provided.
+1. Files are uploaded to Atlas (if needed).
+2. A diagnostic job starts processing your data, and a link to the live job run is provided.
 3. You'll see real-time progress as the job runs, both on the job page and in the ongoing CLI session.
-4. Processing takes 15-40 minutes depending on the size of your data upload (10GB of data ~ 30 minutes)
-5. When complete, you get a link to your diagnostic issue report
+4. Processing takes 15-40 minutes depending on the size of your data upload (10GB of data ~ 30 minutes).
+5. When complete, you'll receive a link to your diagnostic issue report.
 
 <Frame>
   ![Example Ghost Flight Report](/issue.png)
@@ -120,7 +120,7 @@ View the current status of any job run.
 atlas cancel <job-run-id>
 ```
 
-Stop a job that's currently running or pending. The computation will stop and the job status will update to `cancelled`.
+Stop a job that's currently running or pending. The computation stops and the job status updates to `cancelled`.
 
 ---
 
@@ -141,19 +141,19 @@ Stop a job that's currently running or pending. The computation will stop and th
 ## Tips & best practices
 
 **File uploads:**
-- If you're analyzing the same data multiple times, the CLI remembers uploaded files - just select "use existing" when prompted
-- For large directories, the CLI uploads files in parallel for faster processing
-- Directory structure is preserved: `~/myFolder` uploads to `s3://bucket/user_uploaded_issue_files/myFolder`
+- If you're analyzing the same data multiple times, the CLI remembers previously uploaded files - just select "use existing" when prompted.
+- For large directories, the CLI uploads files in parallel for faster processing.
+- Directory structure is preserved: `~/myFolder` uploads to `s3://bucket/user_uploaded_issue_files/myFolder`.
 
 **Job management:**
-- The job run URL is displayed immediately when a job starts - save it for reference
-- Use `--resume` if you need to disconnect from the CLI but want to check back later
-- Jobs can be viewed and managed on the web at `https://regent.atlas.arena-ai.com/jobs/<job-run-id>`
+- The job run URL is displayed immediately when a job starts - save it for reference.
+- Use `--resume` if you need to disconnect from the CLI but want to check back later.
+- Jobs can be viewed and managed on the web at `https://regent.atlas.arena-ai.com/jobs/<job-run-id>`.
 
 **Authentication:**
-- Your token is saved to `~/.atlas/token` and remains valid for 24 hours
-- Run `atlas login` again if you see authentication errors
-- The Atlas URL is saved to `~/.atlas/url` during installation
+- Your token is saved to `~/.atlas/token` and remains valid for 24 hours.
+- Run `atlas login` again if you see authentication errors.
+- The Atlas URL is saved to `~/.atlas/url` during installation.
 
 ---
 
@@ -170,11 +170,11 @@ curl -fsSL -k https://regent.atlas.arena-ai.com/api/v1/cli/install.sh | bash
 ```
 
 **Can't find uploaded file:**
-- Check the filename matches exactly (case-sensitive)
-- Use the full path if the file is in a subdirectory
-- Files are uploaded to `user_uploaded_issue_files/` prefix in S3
+- Check that the filename matches exactly (case-sensitive).
+- Use the full path if the file is in a subdirectory.
+- Files are uploaded to the `user_uploaded_issue_files/` prefix in S3.
 
 **Job taking too long:**
-- Check the job status on the web: `https://regent.atlas.arena-ai.com/jobs/<job-run-id>`
-- Large datasets with many files can take 15+ minutes
-- You can safely disconnect and use `--resume` to check back later
+- Check the job status on the web: `https://regent.atlas.arena-ai.com/jobs/<job-run-id>`.
+- Large datasets with many files can take 30 minutes or more.
+- You can safely disconnect and use `--resume` to check back later.
